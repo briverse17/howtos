@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/howtos/static/css/main.f855e6bc.css",
+    "main.js": "/howtos/static/js/main.80020d96.js",
+    "static/js/453.68d73973.chunk.js": "/howtos/static/js/453.68d73973.chunk.js",
+    "static/media/logo.svg": "/howtos/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/howtos/index.html",
+    "main.f855e6bc.css.map": "/howtos/static/css/main.f855e6bc.css.map",
+    "main.80020d96.js.map": "/howtos/static/js/main.80020d96.js.map",
+    "453.68d73973.chunk.js.map": "/howtos/static/js/453.68d73973.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.80020d96.js"
+  ]
+}
