@@ -1,0 +1,11 @@
+services:
+  page:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    volumes:
+      - ./:/usr/app
+    ports:
+      - 3000:3000
+    command: ["npm", "run", "start"]
