@@ -1,29 +1,28 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs')
+const path = require('path')
 
-const directoryPath = 'content';
-const jsonFilePath = 'content/contents.json';
+const directoryPath = 'content'
+const jsonFilePath = 'content/contents.json'
 
 // Read existing JSON file or create an empty array if it doesn't exist
-const files = Object();
+const files = Object()
 if (fs.existsSync(jsonFilePath)) {
-    // files = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
-    Object.assign(files, JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8')));
+    Object.assign(files, JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8')))
 }
 
 // Read the directory and get all file names
+const newFiles = Object()
 fs.readdirSync(directoryPath).map((file) => {
-    if (file.endsWith(".md") && Object.hasOwn(files, file)) {
-        content = fs.readFileSync(path.join(directoryPath, file), 'utf-8')
-        Object.assign(files, {...files, file: content})
+    if (file.endsWith(".md") && !Object.hasOwn(files, file)) {
+        content = fs.readFileSync(path.join(directoryPath, file), 'utf-8').split('\n').shift()
+        newFiles[file] = content
     }
-});
-
+})
 
 // // Merge existing file list with new file list
-// const updatedFileList = Array.from(new Set([...fileList, ...files]));
+const updatedFiles = { ...files, ...newFiles }
 
 // Write the updated file list back to JSON file
-fs.writeFileSync(jsonFilePath, JSON.stringify(files, null, 2));
+fs.writeFileSync(jsonFilePath, JSON.stringify(updatedFiles, null, 2))
 
-console.log(`Updated ${jsonFilePath} with ${files.length} files from ${directoryPath}`);
+console.log(`Updated ${jsonFilePath} with ${updatedFiles.length} files from ${directoryPath}`)
