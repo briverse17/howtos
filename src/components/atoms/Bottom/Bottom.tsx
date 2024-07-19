@@ -1,11 +1,10 @@
-import logo from '../../logo.svg';
+import logo from "../../../logo.svg"
 
-
-function Bottom() {
+export function Bottom() {
     return (
         <footer className="bg-slate-400 fixed inset-x-0 bottom-0 flex items-center justify-center h-10">
             <a
-                href="https://github.com/briverse17/howtos"
+                href="https://github.com/briverse17/howtos/tree/content"
                 target="_blank"
                 rel="noopener noreferrer"
             ><img
@@ -17,5 +16,3 @@ function Bottom() {
         </footer>
     )
 }
-
-export default Bottom;

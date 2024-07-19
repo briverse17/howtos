@@ -4,14 +4,14 @@ import strip from 'strip-markdown'
 type Props = {
     id: string
     value: string
-    active: string
+    active: string | null
     hovered: string | null
-    onClick: React.Dispatch<React.SetStateAction<string>>
+    onClick: React.Dispatch<React.SetStateAction<string | null>>
     onMouseEnter: React.Dispatch<React.SetStateAction<string | null>>
     onMouseLeave: React.Dispatch<React.SetStateAction<string | null>>
 }
 
-function MenuItem(props: Props) {
+export function MenuItem(props: Props) {
     const text = (
         <Markdown
             remarkPlugins={[strip]}
@@ -21,7 +21,7 @@ function MenuItem(props: Props) {
     )
     return (
         <div
-            id={props.id}
+            // key={props.id}
             className="cursor-pointer px-2 rounded-md"
             style={{
                 backgroundColor: props.id === props.hovered ? "rgb(229 231 235)" : "white",
@@ -35,5 +35,3 @@ function MenuItem(props: Props) {
         </div>
     )
 }
-
-export default MenuItem;
