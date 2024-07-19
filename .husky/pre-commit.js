@@ -1,8 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
-const directoryPath = 'content'
-const jsonFilePath = 'content/contents.json'
+const directoryPath = '.'
+const jsonFilePath = './contents.json'
 
 // Read existing JSON file or create an empty array if it doesn't exist
 const files = Object()
