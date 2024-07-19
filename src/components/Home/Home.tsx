@@ -1,57 +1,64 @@
-import { useEffect, useState } from "react";
-import Markdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import { ArticlesType } from "../../types";
-import Top from "../Top/Top";
+import { useEffect, useState } from "react"
+import { ArticlesType } from "../../types"
+import Top from "../Top/Top"
+import Bottom from "../Bottom/Bottom"
+import MenuItem from "../MenuItem/MenuItem"
+import { Viewer } from "../Viewer"
 
 type Props = {
     articles: ArticlesType
 }
 
 function Home(props: Props) {
-    const articles = props.articles
-
-    const [fileName, setFileName] = useState<string | null>(Object.keys(articles)[0]);
-    const [fileContent, setFileContent] = useState<string | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const first = Object.keys(props.articles)[0]
+    const [active, setActive] = useState<string>(first)
+    const [hovered, setHovered] = useState<string | null>(null)
+    const [content, setContent] = useState<string | null>(null)
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         const fetchContent = async () => {
             try {
-                const response = await fetch(`https://raw.githubusercontent.com/briverse17/howtos/develop/content/${fileName}`);
-                const content = await response.text();
+                const response = await fetch(
+                    `https://raw.githubusercontent.com/briverse17/howtos/content/${active}`
+                )
+                const content = await response.text()
                 if (!response.ok) {
-                    throw new Error(`Error: ${content}`);
+                    throw new Error(`Error: ${content}`)
                 }
-                setFileContent(content)
+                setContent(content)
                 setError(null)
             } catch (error) {
-                setError((error as Error).message);
+                setError((error as Error).message)
             }
         }
         fetchContent()
-    }, [fileName])
+    }, [active])
 
     return (
-        <div className="container mx-auto">
+        <div>
             <Top></Top>
-            <div className="flex h-screen">
-                <div className="w-1/4 border-r border-gray-300 p-4">
-                    <ul>
-                        {Object.entries(articles).map(([key, value]) => (
-                            <li key={key} className="cursor-pointer p-2 hover:bg-gray-200" onClick={() => { setFileName(key) }}>{value}</li>
+            <div className="container flex mx-auto my-2 max-h-[calc(100vh-6rem)]">
+                <div className="w-1/5 border-[1px] rounded-2xl border-gray-300">
+                    <div className="px-2 py-2 grid gap-2 text-sm">
+                        {Object.entries(props.articles).map(([key, value]) => (
+                            <MenuItem
+                                id={key}
+                                value={value}
+                                active={active}
+                                hovered={hovered}
+                                onClick={setActive}
+                                onMouseEnter={setHovered}
+                                onMouseLeave={setHovered}
+                            />
                         ))}
-                    </ul>
-                </div>
-                <div className="w-3/4 p-4">
-                    <div className="article-content">
-                        <Markdown remarkPlugins={[remarkGfm]}>{error ? error : fileContent}</Markdown>
                     </div>
                 </div>
-            </div>
-
-        </div>
+                <Viewer content={content ? content : error} />
+            </div >
+            <Bottom></Bottom>
+        </div >
     )
 }
 
-export default Home;
+export default Home
