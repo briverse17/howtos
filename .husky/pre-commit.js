@@ -25,4 +25,4 @@ const updatedFiles = { ...files, ...newFiles }
 // Write the updated file list back to JSON file
 fs.writeFileSync(jsonFilePath, JSON.stringify(updatedFiles, null, 2))
 
-console.log(`Updated ${jsonFilePath} with ${updatedFiles.length} files from ${directoryPath}`)
+console.log(`Updated ${jsonFilePath} with ${Object.keys(updatedFiles).length} files from ${directoryPath}`)
