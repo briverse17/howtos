@@ -5,7 +5,7 @@ import { Container } from "../../organisms/Container"
 
 export function Home() {
     return (
-        <div>
+        <div className="flex flex-col justify-between h-screen">
             <Top />
             <Container />
             <Bottom />

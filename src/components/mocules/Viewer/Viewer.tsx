@@ -8,7 +8,7 @@ type Props = {
 
 function ViewerInner(props: Props) {
     return (
-        <div className="markdown-body px-8 py-2 min-h-[calc(100vh-6rem)]">
+        <div className="markdown-body px-4 md:px-8 py-2 min-h-full">
             <Markdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
@@ -22,7 +22,7 @@ function ViewerInner(props: Props) {
 
 export function Viewer(props: Props) {
     return (
-        <div className="mx-2 w-4/5 rounded-2xl overflow-auto">
+        <div className="order-1 md:order-2 w-[96vw] md:w-4/5 h-[95vh] md:h-full mx-auto rounded-t-2xl md:rounded-t-none md:rounded-r-2xl md:border-y-2 md:border-r-2 md:border-gray-300 overflow-auto">
             <ViewerInner {...props} />
         </div>
     )

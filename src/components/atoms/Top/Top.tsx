@@ -1,7 +1,7 @@
 export function Top() {
     return (
-        <header className="bg-slate-800 top-0 flex items-center justify-center md:h-10 md:text-3xl text-white font-mono font-bold">
-            <span className="md:h-8 md:my-2 max-sm:leading-5 h-5 my-1">How to...</span>
+        <header className="bg-slate-800 top-0 inset-x-0 flex items-center justify-center max-h-8 md:max-h-12">
+            <span className="my-1 leading-6 md:my-2 md:leading-8 text-white font-mono font-bold text-2xl">How to...</span>
         </header>
     )
 }

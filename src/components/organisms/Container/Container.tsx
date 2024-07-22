@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { SetStateAction, useEffect, useState } from "react"
 import { ArticlesType } from "../../../types"
 import { Menu } from "../../mocules/Menu"
 import { Viewer } from "../../mocules/Viewer"
@@ -6,6 +6,8 @@ import { Viewer } from "../../mocules/Viewer"
 
 export function Container() {
     const [articles, setArticles] = useState<ArticlesType>(Object())
+    const [active, setActive] = useState<string | null>(null)
+    const [hovered, setHovered] = useState<string | null>(null)
     const [content, setContent] = useState<string | null>(null)
     const [error, setError] = useState<string | null>(null)
 
@@ -28,10 +30,17 @@ export function Container() {
         fetchArticles()
     }, [])
 
-
     return (
-        <div className="container flex mx-auto my-2 max-h-[calc(100vh-6rem)]">
-            <Menu articles={articles} setContent={setContent} setError={setError} />
+        <div className="container flex flex-col md:flex-row mx-auto h-[90vh] md:h-[89vh]">
+            <Menu
+                articles={articles}
+                active={active}
+                hovered={hovered}
+                setActive={setActive}
+                setHovered={setHovered}
+                setContent={setContent}
+                setError={setError}
+            />
             <Viewer content={content ? content : error} />
         </div >
     )

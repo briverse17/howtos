@@ -1,29 +1,33 @@
+import Markdown from "react-markdown"
+import strip from 'strip-markdown'
+
+import { useEffect } from "react"
 import { ArticlesType } from "../../../types"
 import { MenuItem } from "../../atoms/MenuItem"
-import { useEffect, useState } from "react"
 
 type Props = {
     articles: ArticlesType
+    active: string | null
+    hovered: string | null
+    setActive: React.Dispatch<React.SetStateAction<string | null>>
+    setHovered: React.Dispatch<React.SetStateAction<string | null>>
     setContent: React.Dispatch<React.SetStateAction<string | null>>
     setError: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 export function Menu(props: Props) {
-    const [active, setActive] = useState<string | null>(null)
-    const [hovered, setHovered] = useState<string | null>(null)
-
     useEffect(() => {
-        if (!active) {
-            setActive(Object.keys(props.articles)[0])
+        if (!props.active) {
+            props.setActive(Object.keys(props.articles)[0])
         }
     }, [props])
 
     useEffect(() => {
         const fetchContent = async () => {
             try {
-                if (active) {
+                if (props.active) {
                     const response = await fetch(
-                        `https://raw.githubusercontent.com/briverse17/howtos/content/${active}`
+                        `https://raw.githubusercontent.com/briverse17/howtos/content/${props.active}`
                     )
                     const content = await response.text()
                     if (!response.ok) {
@@ -37,21 +41,40 @@ export function Menu(props: Props) {
             }
         }
         fetchContent()
-    }, [active])
+    }, [props.active])
 
     return (
-        <div className="w-1/5 border-[1px] rounded-2xl border-gray-300">
-            <div className="px-2 py-2 grid gap-2 text-sm">
+        <div className="order-2 md:order-1 w-[96vw] md:w-1/5 h-[5vh] md:h-full mx-auto border-2 border-t-0 md:border-t-2 md:border-r-0 border-gray-300 rounded-b-2xl md:rounded-b-none md:rounded-l-2xl">
+            <select
+                className="md:hidden w-full h-[5vh] bg-gray-300 p-2 rounded-b-xl md:rounded-b-none md:rounded-l-2xl cursor-pointer"
+                value={props.active ? props.active : ""}
+                onChange={(e) => props.setActive(e.target.value)}
+            >
+                {Object.entries(props.articles).map(([key, value]) => (
+                    <option key={key} value={key}>
+                        <MenuItem
+                            id={key}
+                            value={value}
+                            active={props.active}
+                            hovered={props.hovered}
+                            onClick={props.setActive}
+                            onMouseEnter={props.setHovered}
+                            onMouseLeave={props.setHovered}
+                        />
+                    </option>
+                ))}
+            </select>
+            <div className="hidden md:grid pl-1 pb-1 gap-1 text-sm">
                 {Object.entries(props.articles).map(([key, value]) => (
                     <div key={key}>
                         <MenuItem
                             id={key}
                             value={value}
-                            active={active}
-                            hovered={hovered}
-                            onClick={setActive}
-                            onMouseEnter={setHovered}
-                            onMouseLeave={setHovered}
+                            active={props.active}
+                            hovered={props.hovered}
+                            onClick={props.setActive}
+                            onMouseEnter={props.setHovered}
+                            onMouseLeave={props.setHovered}
                         />
                     </div>
                 ))}

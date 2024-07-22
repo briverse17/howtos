@@ -21,11 +21,11 @@ export function MenuItem(props: Props) {
     )
     return (
         <div
-            // key={props.id}
-            className="cursor-pointer px-2 rounded-md"
+            className="cursor-pointer px-2 py-1 rounded-l-lg"
             style={{
-                backgroundColor: props.id === props.hovered ? "rgb(229 231 235)" : "white",
-                fontWeight: props.id === props.active ? "bold" : "normal"
+                backgroundColor: props.id === props.hovered || props.id === props.active ? "RGB(13, 17, 23)" : "white",
+                color: props.id === props.hovered || props.id === props.active ? "white" : "black",
+                fontWeight: props.id === props.active ? "bold" : "normal",
             }}
             onClick={() => props.onClick(props.id)}
             onMouseEnter={() => props.onMouseEnter(props.id)}
