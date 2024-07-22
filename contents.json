@@ -4,5 +4,6 @@
   "article3.md": "# Article 3: A paragraph with *emphasis* and **strong importance**",
   "article4.md": "# Article 4: A paragraph with *emphasis* and **strong importance**",
   "article5.md": "# Article 5: A paragraph with *emphasis* and **strong importance**",
-  "warp-cli-start.md": "# How to use Cloudflare WARP on Linux"
+  "warp-cli-start.md": "# How to use Cloudflare WARP on Linux",
+  "update-vscode.md": "# How to update VSCode automatically in Ubuntu 20.04"
 }
