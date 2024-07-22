@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const { execSync } = require('child_process')
 
 const directory = '.'
 const contentsFile = './contents.json'
@@ -32,11 +33,8 @@ function updateContents(directory, contentFile) {
 try {
     // Scan the directory and update files.json
     updateContents(directory, contentsFile)
-
     // Stage the updated files.json
     execSync(`git add ${contentsFile}`)
-
-    // console.log('Pre-commit hook completed successfully.');
 } catch (error) {
     console.error('Error in pre-commit hook:', error)
     process.exit(1)
