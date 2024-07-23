@@ -58,3 +58,9 @@ Disconnect
 ```shell
 warp-cli disconnect
 ```
+---
+If you encounter network problems after disconnecting WARP. Try restarting the `NetworkManager`:
+
+```shell
+sudo systemctl restart NetworkManager
+```
