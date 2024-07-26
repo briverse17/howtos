@@ -14,7 +14,7 @@ type Props = {
 export function MenuItem(props: Props) {
   const text = <Markdown remarkPlugins={[strip]}>{props.value}</Markdown>;
   return (
-    <button
+    <div
       className="cursor-pointer px-2 py-1 rounded-l-lg"
       style={{
         backgroundColor:
@@ -27,11 +27,15 @@ export function MenuItem(props: Props) {
             : 'black',
         fontWeight: props.id === props.active ? 'bold' : 'normal',
       }}
-      onClick={() => props.onClick(props.id)}
-      onMouseEnter={() => props.onMouseEnter(props.id)}
-      onMouseLeave={() => props.onMouseLeave(null)}
     >
-      {text}
-    </button>
+      <button
+        className="text-left"
+        onClick={() => props.onClick(props.id)}
+        onMouseEnter={() => props.onMouseEnter(props.id)}
+        onMouseLeave={() => props.onMouseLeave(null)}
+      >
+        {text}
+      </button>
+    </div>
   );
 }
