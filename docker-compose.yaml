@@ -8,4 +8,4 @@ services:
       - ./:/usr/app
     ports:
       - 3000:3000
-    command: ["npm", "run", "start"]
+    command: ['npm', 'run', 'start']
