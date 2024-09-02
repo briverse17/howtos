@@ -11,6 +11,7 @@
     "@types/node": "^16.18.102",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "next": "^14.2.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -20,11 +21,15 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start-old": "react-scripts start",
+    "build-old": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky"
+    "prepare": "husky",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "npx serve@latest ./build",
+    "lint": "next lint"
   },
   "eslintConfig": {
     "extends": [
