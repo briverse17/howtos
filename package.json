@@ -8,6 +8,7 @@
     "deploy": "gh-pages -d out",
     "dev": "next dev",
     "build": "next build",
+    "preview": "npx serve out",
     "start": "next start",
     "lint": "next lint"
   },
