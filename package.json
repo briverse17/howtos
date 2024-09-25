@@ -3,60 +3,38 @@
   "version": "0.1.0",
   "homepage": "https://briverse17.github.io/howtos",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.102",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "next": "^14.2.7",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
-  },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start-old": "react-scripts start",
-    "build-old": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prepare": "husky",
     "dev": "next dev",
     "build": "next build",
-    "start": "npx serve@latest ./build",
+    "start": "next start",
     "lint": "next lint"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "next": "14.2.8",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^9.10.0",
     "gh-pages": "^6.1.1",
     "husky": "^9.0.11",
+    "postcss": "^8",
+    "prettier": "^3.3.3",
     "react-markdown": "^9.0.1",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
     "remark-rehype": "^11.1.0",
     "strip-markdown": "^6.0.0",
-    "tailwindcss": "^3.4.6"
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5",
+    "vite": "^5.1.0",
+    "vite-tsconfig-paths": "^4.2.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }
