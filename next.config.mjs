@@ -5,7 +5,7 @@ const nextConfig = {
     assetPrefix: "/howtos/",
     trailingSlash: true,
     images: {
-        unoptimized: true,
+        // unoptimized: true,
         remotePatterns: [
             {
                 protocol: "https",
