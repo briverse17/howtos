@@ -8,4 +8,6 @@ services:
       - ./:/usr/app
     ports:
       - 3000:3000
-    command: ['npm', 'run', 'start']
+    tty: true
+    command: [ "/bin/bash" ]
+    # command: [ "npm", "run", "start" ]
