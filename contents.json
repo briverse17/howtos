@@ -5,5 +5,7 @@
   "article4.md": "# Article 4: A paragraph with *emphasis* and **strong importance**",
   "article5.md": "# Article 5: A paragraph with *emphasis* and **strong importance**",
   "warp-cli-start.md": "# How to use Cloudflare WARP on Linux",
-  "update-vscode.md": "# How to update VSCode automatically in Ubuntu 20.04"
+  "update-vscode.md": "# How to update VSCode automatically in Ubuntu 20.04",
+  "python3-venv-activate-powershell-nonadmin.md": "# How to activate Python3 virtualenv in Windows Powershell without admin privilege",
+  "python3-venv-check-path.md": "# How to check which Python3 virtualenv is being activated in Windows"
 }
