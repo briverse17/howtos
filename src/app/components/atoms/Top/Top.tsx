@@ -20,7 +20,7 @@ export function Top() {
         rel="noopener noreferrer"
       >
         <img
-          src="howtos/logo.svg" // {logo}
+          src="howtos/logo.svg"
           className="my-1 h-6 md:my-2 md:h-8 pointer-events-auto motion-safe:animate-logoSpin"
           alt="https://github.com/briverse17/howtos/tree/content"
         />

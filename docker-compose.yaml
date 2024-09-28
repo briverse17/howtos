@@ -1,13 +1,25 @@
 services:
-  page:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: dev
+  # page:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #     target: dev
+  #   volumes:
+  #     - ./:/usr/app
+  #   ports:
+  #     - 3000:3000
+  #   tty: true
+  #   command: [ "/bin/bash" ]
+  #   # command: [ "npm", "run", "start" ]
+
+  www:
+    image: nginx
     volumes:
-      - ./:/usr/app
+      - ./out:/var/www/out
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - 3000:3000
-    tty: true
-    command: [ "/bin/bash" ]
-    # command: [ "npm", "run", "start" ]
+      - "3000:80"
+    # tty: true
+    # environment:
+    #   - NGINX_HOST=mysite.localhost
+    #   - NGINX_PORT=80
