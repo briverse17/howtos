@@ -11,28 +11,25 @@ type Props = {
   onMouseLeave: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-export function MenuItem(props: Props) {
-  const text = <Markdown remarkPlugins={[strip]}>{props.value}</Markdown>;
+export function MenuItem({ id, value, active, hovered, onClick, onMouseEnter, onMouseLeave }: Props) {
+  const text = <Markdown remarkPlugins={[strip]}>{value}</Markdown>;
+  const isActive = id === active;
+  const isHovered = id === hovered;
+
   return (
     <div
-      className="cursor-pointer px-2 py-1 rounded-l-xl min-h-10 max-h-10 "
-      style={{
-        backgroundColor:
-          props.id === props.hovered || props.id === props.active
-            ? 'RGB(13, 17, 23)'
-            : 'white',
-        color:
-          props.id === props.hovered || props.id === props.active
-            ? 'white'
-            : 'black',
-        fontWeight: props.id === props.active ? 'bold' : 'normal',
-      }}
+      className={`
+        cursor-pointer px-4 py-4 border-b-4 border-foreground font-mono transition-transform duration-150 ease-out
+        ${isActive ? 'bg-accent text-black font-black translate-x-2' : ''}
+        ${!isActive && isHovered ? 'bg-foreground text-background translate-x-1' : ''}
+        ${!isActive && !isHovered ? 'bg-background text-foreground font-bold' : ''}
+      `}
     >
       <button
-        className="text-left w-full truncate"
-        onClick={() => props.onClick(props.id)}
-        onMouseEnter={() => props.onMouseEnter(props.id)}
-        onMouseLeave={() => props.onMouseLeave(null)}
+        className="text-left w-full uppercase tracking-tighter text-sm md:text-lg leading-tight"
+        onClick={() => onClick(id)}
+        onMouseEnter={() => onMouseEnter(id)}
+        onMouseLeave={() => onMouseLeave(null)}
       >
         {text}
       </button>

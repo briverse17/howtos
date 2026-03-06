@@ -31,7 +31,7 @@ export function Container() {
   }, []);
 
   return (
-    <div className="container flex flex-col md:flex-row mx-auto my-auto min-h-[95vh] py-2">
+    <div className="flex flex-col md:flex-row w-full flex-1 overflow-hidden">
       <Menu
         articles={articles}
         active={active}
