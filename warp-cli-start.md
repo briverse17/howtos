@@ -1,3 +1,12 @@
+---
+title: "How to use Cloudflare WARP on Linux"
+description: "Connect and disconnect WARP on Linux using warp-cli, with version-specific command differences and NetworkManager tips."
+category: "Networking"
+tags: [linux, cloudflare, warp, cli, networking]
+date: 2024-04-01
+status: published
+featured: true
+---
 # How to use Cloudflare WARP on Linux
 
 ## Check your `warp-cli` version

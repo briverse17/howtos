@@ -1,3 +1,11 @@
+---
+title: "How to update VSCode automatically in Ubuntu 20.04"
+description: "A shell script to download and install the latest stable VSCode .deb package, with optional cron scheduling."
+category: "Dev Tools"
+tags: [linux, ubuntu, vscode, shell, automation]
+date: 2024-01-01
+status: published
+---
 # How to update VSCode automatically in Ubuntu 20.04
 
 Create a script file, for example `update_vscode.sh`
