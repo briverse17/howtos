@@ -1,19 +1,17 @@
 import { useEffect, useState } from 'react';
-import { ArticlesType } from '../../../types';
+import { ParsedFrontmatter } from '../../../utils/frontmatter';
 import { MenuItem } from '../../atoms/MenuItem';
 import { Search } from '../Search/Search';
 
 type Props = {
-  articles: ArticlesType;
+  articles: Record<string, ParsedFrontmatter>;
   active: string | null;
   hovered: string | null;
   setActive: React.Dispatch<React.SetStateAction<string | null>>;
   setHovered: React.Dispatch<React.SetStateAction<string | null>>;
-  setContent: React.Dispatch<React.SetStateAction<string | null>>;
-  setError: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-export function Menu({ articles, active, hovered, setActive, setHovered, setContent, setError }: Props) {
+export function Menu({ articles, active, hovered, setActive, setHovered }: Props) {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -22,30 +20,14 @@ export function Menu({ articles, active, hovered, setActive, setHovered, setCont
     }
   }, [articles, active, setActive]);
 
-  useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        if (active) {
-          const response = await fetch(
-            `https://raw.githubusercontent.com/briverse17/howtos/content/${active}`
-          );
-          const responseText = await response.text();
-          if (!response.ok) {
-            throw new Error(`Error: ${responseText}`);
-          }
-          setContent(responseText);
-          setError(null);
-        }
-      } catch (err) {
-        setError((err as Error).message);
-      }
-    };
-    fetchContent();
-  }, [active, setContent, setError]);
-
   const filteredArticles = Object.entries(articles).filter(([key, value]) => {
-    return key.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      value.toLowerCase().includes(searchTerm.toLowerCase());
+    const searchLow = searchTerm.toLowerCase();
+    const titleMatch = (value.data.title || '').toLowerCase().includes(searchLow);
+    const descMatch = (value.data.description || '').toLowerCase().includes(searchLow);
+    const tagsMatch = (value.data.tags || []).some(tag => tag.toLowerCase().includes(searchLow));
+    const keyMatch = key.toLowerCase().includes(searchLow);
+
+    return keyMatch || titleMatch || descMatch || tagsMatch;
   });
 
   return (

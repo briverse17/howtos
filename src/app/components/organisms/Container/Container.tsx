@@ -1,33 +1,50 @@
 'use client'
 import { useEffect, useState } from 'react';
-import { ArticlesType } from '../../../types';
+import { ArticlesType } from '../../../types/Articles';
+import { parseFrontmatter, ParsedFrontmatter } from '../../../utils/frontmatter';
 import { Menu } from '../../mocules/Menu';
 import { Viewer } from '../../mocules/Viewer';
 
 export function Container() {
-  const [articles, setArticles] = useState<ArticlesType>(Object());
+  const [articles, setArticles] = useState<Record<string, ParsedFrontmatter>>({});
   const [active, setActive] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
-  const [content, setContent] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchArticles = async () => {
+    const fetchArticlesAndMetadata = async () => {
       try {
+        // 1. Fetch file map
         const response = await fetch(
           `https://raw.githubusercontent.com/briverse17/howtos/content/contents.json`
         );
-        const content = await response.json();
+        const articlesMap: ArticlesType = await response.json();
+
         if (!response.ok) {
-          throw new Error(`Error: ${content}`);
+          throw new Error(`Error: ${articlesMap}`);
         }
-        setArticles(content);
+
+        // 2. Fetch all markdowns in parallel to eliminate waterfalls
+        const files = Object.entries(articlesMap);
+        const parsedCache: Record<string, ParsedFrontmatter> = {};
+
+        await Promise.all(
+          files.map(async ([key, fileName]) => {
+            const raw = await fetch(
+              `https://raw.githubusercontent.com/briverse17/howtos/content/${key}`
+            );
+            const markdownStr = await raw.text();
+            parsedCache[key] = parseFrontmatter(markdownStr, fileName);
+          })
+        );
+
+        setArticles(parsedCache);
         setError(null);
       } catch (error) {
         setError((error as Error).message);
       }
     };
-    fetchArticles();
+    fetchArticlesAndMetadata();
   }, []);
 
   return (
@@ -38,10 +55,8 @@ export function Container() {
         hovered={hovered}
         setActive={setActive}
         setHovered={setHovered}
-        setContent={setContent}
-        setError={setError}
       />
-      <Viewer content={content ? content : error} />
+      <Viewer article={active ? articles[active] : null} error={error} />
     </div>
   );
 }
