@@ -6,7 +6,7 @@ export function Top() {
         href="https://github.com/briverse17"
         target="_blank"
         rel="noopener noreferrer"
-        className="hidden md:block transition-all hover:-translate-y-1 hover:text-accent z-10"
+        className="hidden md:block transition-all hover:-translate-y-1 hover:text-accent z-10 dark:text-foreground"
       >
         <span className="font-mono text-xl font-extrabold uppercase tracking-tighter">
           /BRIVERSE17
