@@ -7,9 +7,10 @@ import { ParsedFrontmatter } from '../../../utils/frontmatter';
 type Props = {
   article: ParsedFrontmatter | null;
   error: string | null;
+  setSearchTerm: (value: string) => void;
 };
 
-export function Viewer({ article, error }: Props) {
+export function Viewer({ article, error, setSearchTerm }: Props) {
   return (
     <div className="flex-1 h-[50vh] md:h-full overflow-y-auto bg-background p-6 md:p-16 relative">
       <div className="markdown-body max-w-4xl mx-auto brutal-markdown font-mono">
@@ -39,9 +40,13 @@ export function Viewer({ article, error }: Props) {
                 </span>
               )}
               {article.data.tags?.map((tag, idx) => (
-                <span key={idx} className="border-2 border-foreground px-2 py-1 text-accent border-accent">
+                <button
+                  key={idx}
+                  onClick={() => setSearchTerm(tag)}
+                  className="border-2 border-accent px-2 py-1 text-accent font-bold cursor-pointer hover:bg-accent hover:text-black transition-colors"
+                >
                   #{tag}
-                </span>
+                </button>
               ))}
             </div>
           </div>

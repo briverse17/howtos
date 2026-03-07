@@ -10,6 +10,7 @@ export function Container() {
   const [active, setActive] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchArticlesAndMetadata = async () => {
@@ -55,8 +56,15 @@ export function Container() {
         hovered={hovered}
         setActive={setActive}
         setHovered={setHovered}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
       />
-      <Viewer article={active ? articles[active] : null} error={error} />
+      <Viewer
+        article={active ? articles[active] : null}
+        error={error}
+        setSearchTerm={setSearchTerm}
+      />
     </div>
   );
 }
+

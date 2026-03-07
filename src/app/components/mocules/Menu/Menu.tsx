@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ParsedFrontmatter } from '../../../utils/frontmatter';
 import { MenuItem } from '../../atoms/MenuItem';
 import { Search } from '../Search/Search';
@@ -9,10 +9,11 @@ type Props = {
   hovered: string | null;
   setActive: React.Dispatch<React.SetStateAction<string | null>>;
   setHovered: React.Dispatch<React.SetStateAction<string | null>>;
+  searchTerm: string;
+  setSearchTerm: (value: string) => void;
 };
 
-export function Menu({ articles, active, hovered, setActive, setHovered }: Props) {
-  const [searchTerm, setSearchTerm] = useState('');
+export function Menu({ articles, active, hovered, setActive, setHovered, searchTerm, setSearchTerm }: Props) {
 
   useEffect(() => {
     if (!active && Object.keys(articles).length > 0) {
